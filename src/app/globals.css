@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f8fa;
+  --foreground: #152033;
+  --surface: #ffffff;
+  --muted: #5a6a7c;
+  --border: #e2e7ee;
+  --navy: #0b1f3a;
+  --navy-deep: #071528;
+  --teal: #1f6f6a;
+  --teal-soft: #e8f2f1;
+  --gold: #c48a1a;
+  --gold-hover: #a87314;
+  --gold-soft: #f8f1e4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-accent: var(--teal);
+  --color-accent-soft: var(--teal-soft);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-gold-soft: var(--gold-soft);
+  --color-sand: var(--gold-soft);
+  --font-sans: var(--font-source-sans);
+  --font-serif: var(--font-source-serif);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 28%, white);
+  color: var(--navy-deep);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
