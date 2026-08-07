@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { MobileCtaBar } from "@/components/MobileCtaBar";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | EarnBridge Careers",
   },
   description:
-    "Career support, remote-work readiness, digital skills training, and professional preparation services. We do not guarantee employment or income.",
+    "EarnBridge Careers prepares people for legitimate remote work and helps businesses hire assessed, dependable talent. No guaranteed income claims.",
   metadataBase: new URL("https://earnbridgecareers.com"),
   icons: {
     icon: "/earnbridge-logo.png",
@@ -42,8 +43,9 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-sans">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pb-20 md:pb-0">{children}</main>
         <Footer />
+        <MobileCtaBar />
       </body>
     </html>
   );

@@ -1,90 +1,97 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { FaqAccordion } from "@/components/FaqAccordion";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/motion/Reveal";
+import { primaryBtnClass } from "@/lib/ui";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact EarnBridge Careers about remote-work readiness, career support, or digital skills training.",
+    "Contact EarnBridge Careers for job seeker support, employer hiring, partnerships, or safety reports.",
 };
+
+const routes = [
+  {
+    title: "Job seekers",
+    text: "Applications, training interest, and readiness questions.",
+    href: "/apply",
+    cta: "Apply / Find Work",
+    image: "/images/portrait-3.jpg",
+  },
+  {
+    title: "Employers",
+    text: "Hiring briefs, shortlists, and managed team requests.",
+    href: "/hire",
+    cta: "Hire Talent",
+    image: "/images/employer.jpg",
+  },
+  {
+    title: "Partners",
+    text: "Schools, NGOs, training groups, and workforce programmes.",
+    href: "/partners",
+    cta: "Partner enquiry",
+    image: "/images/learning.jpg",
+  },
+  {
+    title: "Safety reports",
+    text: "Report suspicious messages or safety concerns.",
+    href: "/safety",
+    cta: "Open Safety Centre",
+    image: "/images/portrait-2.jpg",
+  },
+];
 
 export default function ContactPage() {
   return (
     <>
       <PageHero
-        title="Contact EarnBridge Careers"
-        description="Have questions about remote-work readiness, career support, or digital skills training? Our team will guide you through the next step."
         eyebrow="Contact"
+        title="Choose the right contact route"
+        description="Use the path that matches your need so we can respond faster and more accurately."
       />
-
-      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <Reveal>
-            <dl className="space-y-8">
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                  Email
-                </dt>
-                <dd className="mt-2">
-                  <a
-                    href="mailto:support@earnbridgecareers.com"
-                    className="text-lg text-navy underline-offset-4 hover:text-teal hover:underline"
-                  >
-                    support@earnbridgecareers.com
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                  Website
-                </dt>
-                <dd className="mt-2 text-lg text-navy">earnbridgecareers.com</dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                  Business type
-                </dt>
-                <dd className="mt-2 text-base text-foreground">
-                  Career development and remote-work support services
-                </dd>
-              </div>
-              <div>
-                <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                  Response time
-                </dt>
-                <dd className="mt-2 text-base text-foreground">
-                  We aim to respond within 24–48 business hours.
-                </dd>
-              </div>
-            </dl>
-          </Reveal>
-
-          <Reveal
-            delay={0.06}
-            className="border border-border bg-surface p-8"
-          >
-            <h2 className="font-serif text-2xl text-navy">Prefer a form?</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Use our interest form to share your goals and the support you
-              need. We will follow up with next steps.
-            </p>
-            <Link
-              href="/apply"
-              className="mt-6 inline-flex rounded bg-gold px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-gold-hover"
+      <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {routes.map((route) => (
+            <div
+              key={route.title}
+              className="overflow-hidden rounded-lg border border-border bg-surface"
             >
-              Go to Interest Form
-            </Link>
-          </Reveal>
+              <Image
+                src={route.image}
+                alt=""
+                width={700}
+                height={320}
+                className="h-36 w-full object-cover"
+              />
+              <div className="p-6">
+                <h2 className="font-serif text-xl text-navy">{route.title}</h2>
+                <p className="mt-2 text-sm text-muted">{route.text}</p>
+                <Link href={route.href} className={`${primaryBtnClass} mt-5`}>
+                  {route.cta}
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <Reveal className="mt-20 border-t border-border pt-12">
-          <h2 className="font-serif text-2xl text-navy md:text-3xl">
-            Frequently asked questions
-          </h2>
-          <FaqAccordion />
-        </Reveal>
+        <div className="mt-12 border-t border-border pt-10">
+          <h2 className="font-serif text-2xl text-navy">Direct email</h2>
+          <a
+            href="mailto:support@earnbridgecareers.com"
+            className="mt-3 inline-block text-lg text-teal hover:underline"
+          >
+            support@earnbridgecareers.com
+          </a>
+          <p className="mt-3 text-sm text-muted">
+            Response time: 24–48 business hours · Official domain only
+          </p>
+          <Link
+            href="/faqs"
+            className="mt-6 inline-flex text-sm font-semibold text-navy hover:underline"
+          >
+            Browse FAQs →
+          </Link>
+        </div>
       </section>
     </>
   );

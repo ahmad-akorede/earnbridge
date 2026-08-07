@@ -1,33 +1,41 @@
 import { NextResponse } from "next/server";
 
-type InterestPayload = {
+type Payload = {
   fullName?: string;
   email?: string;
   phone?: string;
   country?: string;
+  roles?: string;
+  objective?: string;
+  experience?: string;
+  skills?: string;
+  availability?: string;
   device?: string;
-  interest?: string;
-  support?: string;
+  internet?: string;
+  consent?: string;
 };
 
 export async function POST(request: Request) {
-  let body: InterestPayload;
-
+  let body: Payload;
   try {
-    body = (await request.json()) as InterestPayload;
+    body = (await request.json()) as Payload;
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const required = [
+  const required: (keyof Payload)[] = [
     "fullName",
     "email",
     "phone",
     "country",
+    "roles",
+    "objective",
+    "experience",
     "device",
-    "interest",
-    "support",
-  ] as const;
+    "internet",
+    "availability",
+    "consent",
+  ];
 
   for (const key of required) {
     if (!body[key]?.toString().trim()) {
@@ -38,6 +46,13 @@ export async function POST(request: Request) {
     }
   }
 
+  if (body.consent !== "yes") {
+    return NextResponse.json(
+      { error: "Please confirm consent before submitting." },
+      { status: 400 }
+    );
+  }
+
   const email = body.email!.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json(
@@ -46,17 +61,13 @@ export async function POST(request: Request) {
     );
   }
 
-  // Lead capture endpoint ready for email/CRM integration.
-  console.info("[interest]", {
-    fullName: body.fullName!.trim(),
+  const reference = `APP-${Date.now().toString().slice(-8)}`;
+  console.info("[application]", {
+    ...body,
     email,
-    phone: body.phone!.trim(),
-    country: body.country!.trim(),
-    device: body.device!.trim(),
-    interest: body.interest!.trim(),
-    support: body.support!.trim(),
+    reference,
     receivedAt: new Date().toISOString(),
   });
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, reference });
 }

@@ -5,12 +5,14 @@ import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BrandLogo } from "@/components/BrandLogo";
+import { primaryBtnClass } from "@/lib/ui";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/apply", label: "Apply" },
+  { href: "/opportunities", label: "Opportunities" },
+  { href: "/hire", label: "Hire Talent" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -23,7 +25,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 md:px-8">
         <BrandLogo priority onClick={() => setOpen(false)} />
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
           {links.map((link) => {
             const active =
               link.href === "/"
@@ -33,7 +35,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative pb-0.5 text-[0.9375rem] tracking-wide transition-colors ${
+                className={`relative pb-0.5 text-sm tracking-wide transition-colors ${
                   active
                     ? "font-semibold text-navy"
                     : "text-muted hover:text-navy"
@@ -50,17 +52,14 @@ export function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/apply"
-            className="rounded bg-gold px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-gold-hover"
-          >
-            Start Interest Form
+          <Link href="/apply" className={primaryBtnClass}>
+            Find Work
           </Link>
         </nav>
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded border border-border px-3 py-2 text-sm font-medium text-navy md:hidden"
+          className="inline-flex items-center justify-center rounded border border-border px-3 py-2 text-sm font-medium text-navy lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
@@ -73,7 +72,7 @@ export function Header() {
         {open && (
           <motion.nav
             id="mobile-nav"
-            className="overflow-hidden border-t border-border bg-surface px-5 md:hidden"
+            className="overflow-hidden border-t border-border bg-surface px-5 lg:hidden"
             aria-label="Mobile"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
@@ -92,13 +91,20 @@ export function Header() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2">
+              <li className="flex flex-wrap gap-2 pt-2">
                 <Link
                   href="/apply"
-                  className="inline-flex rounded bg-gold px-4 py-2.5 text-sm font-semibold text-white"
+                  className={primaryBtnClass}
                   onClick={() => setOpen(false)}
                 >
-                  Start Interest Form
+                  Find Work
+                </Link>
+                <Link
+                  href="/hire"
+                  className="inline-flex rounded border border-border px-5 py-3 text-sm font-semibold text-navy"
+                  onClick={() => setOpen(false)}
+                >
+                  Hire Talent
                 </Link>
               </li>
             </ul>
