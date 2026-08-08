@@ -21,22 +21,35 @@ const initial = {
   consent: "",
 };
 
-const steps = [
-  "Contact",
-  "Goals",
-  "Readiness",
-  "Confirm",
-];
+const steps = ["Contact", "Goals", "Readiness", "Confirm"];
+
+const MAX_RESUME_BYTES = 5 * 1024 * 1024;
+const ALLOWED_EXT = [".pdf", ".doc", ".docx"];
 
 export function InterestForm() {
   const [step, setStep] = useState(0);
   const [values, setValues] = useState(initial);
+  const [resume, setResume] = useState<File | null>(null);
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
   const [reference, setReference] = useState("");
 
   function update(field: keyof typeof initial, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function validateResume(file: File | null) {
+    if (!file) {
+      return "Please upload your resume (PDF, DOC, or DOCX).";
+    }
+    if (file.size > MAX_RESUME_BYTES) {
+      return "Resume must be 5MB or smaller.";
+    }
+    const lower = file.name.toLowerCase();
+    if (!ALLOWED_EXT.some((ext) => lower.endsWith(ext))) {
+      return "Resume must be a PDF, DOC, or DOCX file.";
+    }
+    return "";
   }
 
   function validateStep() {
@@ -49,7 +62,9 @@ export function InterestForm() {
       );
     }
     if (step === 1) {
-      return Boolean(values.roles.trim() && values.objective.trim() && values.experience.trim());
+      return Boolean(
+        values.roles.trim() && values.objective.trim() && values.experience.trim()
+      );
     }
     if (step === 2) {
       return Boolean(
@@ -58,14 +73,18 @@ export function InterestForm() {
           values.internet.trim()
       );
     }
-    return values.consent === "yes";
+    return values.consent === "yes" && !validateResume(resume);
   }
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validateStep()) {
       setState("error");
-      setMessage("Please complete the required fields on this step.");
+      setMessage(
+        step === 3 && validateResume(resume)
+          ? validateResume(resume)
+          : "Please complete the required fields on this step."
+      );
       return;
     }
     if (step < steps.length - 1) {
@@ -78,22 +97,26 @@ export function InterestForm() {
     setState("submitting");
     setMessage("");
     try {
+      const data = new FormData();
+      Object.entries(values).forEach(([key, value]) => data.append(key, value));
+      if (resume) data.append("resume", resume);
+
       const res = await fetch("/api/interest", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: data,
       });
-      const data = (await res.json().catch(() => null)) as {
+      const payload = (await res.json().catch(() => null)) as {
         error?: string;
         reference?: string;
       } | null;
-      if (!res.ok) throw new Error(data?.error || "Unable to submit right now.");
-      setReference(data?.reference || "");
+      if (!res.ok) throw new Error(payload?.error || "Unable to submit right now.");
+      setReference(payload?.reference || "");
       setState("success");
       setValues(initial);
+      setResume(null);
       setStep(0);
       setMessage(
-        "Thank you. We received your application and will follow up within 24–48 business hours."
+        "Thank you. We received your application and resume, and will follow up within 24–48 business hours."
       );
     } catch (err) {
       setState("error");
@@ -291,6 +314,32 @@ export function InterestForm() {
                   {values.availability}
                 </p>
               </div>
+
+              <label className="block text-sm font-medium text-navy">
+                Upload resume (PDF, DOC, or DOCX · max 5MB)
+                <input
+                  required
+                  type="file"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  className={`${fieldClass} file:mr-3 file:rounded file:border-0 file:bg-teal file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-white`}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0] || null;
+                    setResume(file);
+                    const error = validateResume(file);
+                    if (error) {
+                      setState("error");
+                      setMessage(error);
+                    } else {
+                      setState("idle");
+                      setMessage("");
+                    }
+                  }}
+                />
+              </label>
+              {resume && (
+                <p className="text-sm text-muted">Selected: {resume.name}</p>
+              )}
+
               <label className="flex items-start gap-3 text-sm text-navy">
                 <input
                   type="checkbox"
@@ -301,9 +350,8 @@ export function InterestForm() {
                   className="mt-1"
                 />
                 <span>
-                  I confirm this information is accurate. I understand EarnBridge
-                  Careers does not guarantee employment or income, and will not
-                  ask for passwords, bank logins, or unofficial processing fees.
+                  I confirm this information is accurate and I agree to be
+                  contacted about EarnBridge Careers services.
                 </span>
               </label>
             </>
@@ -345,8 +393,8 @@ export function InterestForm() {
       </div>
 
       <p className="text-xs leading-relaxed text-muted">
-        We only collect information needed to understand your readiness and
-        contact you. Official emails use @earnbridgecareers.com.
+        Your application and resume are sent to EarnBridge Careers for review.
+        Official emails use @earnbridgecareers.com.
       </p>
     </form>
   );

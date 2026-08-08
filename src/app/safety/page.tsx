@@ -14,18 +14,18 @@ export default function SafetyPage() {
       <PageHero
         eyebrow="Trust"
         title="Safety Centre"
-        description="Legitimate career support never asks for your passwords, banking logins, or unofficial processing fees."
+        description="How EarnBridge verifies opportunities, communicates officially, and handles safety concerns."
       />
       <section className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-20">
         <div className="grid gap-12 lg:grid-cols-2">
           <div className="space-y-8">
             <div>
-              <h2 className="font-serif text-2xl text-navy">What we will never request</h2>
+              <h2 className="font-serif text-2xl text-navy">Safety commitments</h2>
               <ul className="mt-4 space-y-2 text-sm text-muted">
-                <li>Passwords, one-time codes, or platform login details</li>
-                <li>Banking app logins or remote access to your devices</li>
-                <li>Unofficial “processing”, “activation”, or “guarantee” fees via personal accounts</li>
-                <li>Sensitive identity documents through informal chat channels without process</li>
+                <li>Clear employer identity checks before introductions</li>
+                <li>Transparent role requirements and communication standards</li>
+                <li>Official website forms and @earnbridgecareers.com email only</li>
+                <li>A simple way to report suspicious activity</li>
               </ul>
             </div>
             <div>

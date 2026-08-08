@@ -7,7 +7,7 @@ import { PageHero } from "@/components/PageHero";
 export const metadata: Metadata = {
   title: "Apply",
   description:
-    "Apply to EarnBridge Careers with a multi-step interest form. No passwords or bank logins required.",
+    "Apply to EarnBridge Careers with a multi-step interest form.",
 };
 
 export default function ApplyPage() {
@@ -34,7 +34,7 @@ export default function ApplyPage() {
             <ul className="mt-4 space-y-2 text-sm text-muted">
               <li>Have a reliable email and phone number ready.</li>
               <li>Be honest about experience and equipment access.</li>
-              <li>Do not share passwords or banking logins.</li>
+              <li>Prepare a resume in PDF, DOC, or DOCX (max 5MB).</li>
             </ul>
             <p className="mt-6 text-sm text-muted">
               Prefer to check readiness first?{" "}

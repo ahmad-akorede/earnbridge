@@ -149,7 +149,7 @@ export default function HomePage() {
           {[
             { label: "Preparation first", text: "Candidates are guided before introductions." },
             { label: "Two clear paths", text: "Find Work for seekers. Hire Talent for employers." },
-            { label: "Safety-minded", text: "No passwords, bank logins, or unofficial fees." },
+            { label: "Safety-minded", text: "Clear process and official communication channels." },
           ].map((item) => (
             <div key={item.label}>
               <p className="font-serif text-xl text-navy">{item.label}</p>

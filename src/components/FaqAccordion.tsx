@@ -14,7 +14,7 @@ const faqs = [
   },
   {
     q: "What information do you collect?",
-    a: "Only basic contact and interest details at the first stage. We do not request passwords or bank details.",
+    a: "Only basic contact and interest details at the first stage.",
   },
 ];
 

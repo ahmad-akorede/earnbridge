@@ -19,7 +19,7 @@ const seekerFaqs = [
   },
   {
     q: "What information do you collect first?",
-    a: "Basic contact details, goals, experience level, and readiness information. We do not ask for passwords or bank logins.",
+    a: "Basic contact details, goals, experience level, and readiness information at the first stage.",
   },
   {
     q: "Are the opportunities on the site live job listings?",

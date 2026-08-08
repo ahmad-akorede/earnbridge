@@ -39,12 +39,12 @@ export default function PrivacyPage() {
           </div>
           <div>
             <h2 className="font-serif text-2xl text-navy">
-              What we do not request
+              Information use
             </h2>
             <p className="mt-3">
-              We do not ask for passwords, bank details, Social Security
-              numbers, government ID, or platform login credentials through
-              public forms.
+              We collect only the details needed to understand your support
+              needs and contact you about EarnBridge Careers services through
+              our public forms.
             </p>
           </div>
           <div>
