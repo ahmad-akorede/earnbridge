@@ -59,12 +59,30 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded border border-border px-3 py-2 text-sm font-medium text-navy lg:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded border border-border text-navy lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
+          aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "Close" : "Menu"}
+          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+          <span className="flex w-5 flex-col gap-[5px]" aria-hidden>
+            <span
+              className={`h-0.5 w-full rounded-full bg-navy transition-transform duration-200 ${
+                open ? "translate-y-[7px] rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full rounded-full bg-navy transition-opacity duration-200 ${
+                open ? "opacity-0" : "opacity-100"
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full rounded-full bg-navy transition-transform duration-200 ${
+                open ? "-translate-y-[7px] -rotate-45" : ""
+              }`}
+            />
+          </span>
         </button>
       </div>
 
