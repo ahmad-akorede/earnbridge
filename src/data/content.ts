@@ -92,7 +92,7 @@ export type SuccessStory = {
 export const successStories: SuccessStory[] = [
   {
     id: "1",
-    name: "Adaobi O.",
+    name: "Biden O.",
     role: "Customer Support Associate",
     startingPoint: "Graduate with limited remote experience and an outdated CV.",
     action:
@@ -100,7 +100,7 @@ export const successStories: SuccessStory[] = [
     result:
       "Shortlisted for a remote support role after assessment and prepared interviews.",
     audience: "candidate",
-    image: "/images/portrait-1.jpg",
+    image: "/images/employee1.jpg",
   },
   {
     id: "2",
@@ -112,7 +112,7 @@ export const successStories: SuccessStory[] = [
     result:
       "Matched into a project-based operations support opportunity with clear expectations.",
     audience: "candidate",
-    image: "/images/portrait-2.jpg",
+    image: "/images/employee3.jpg",
   },
   {
     id: "3",
@@ -141,12 +141,12 @@ export const successStories: SuccessStory[] = [
 
 export const teamMembers = [
   {
-    name: "Amina Bello",
+    name: "Mickael Johnson",
     role: "Career Support Lead",
     image: "/images/portrait-1.jpg",
   },
   {
-    name: "Chidi Okonkwo",
+    name: "Herber Macaulay",
     role: "Talent Partnerships",
     image: "/images/portrait-2.jpg",
   },
@@ -156,7 +156,7 @@ export const teamMembers = [
     image: "/images/portrait-3.jpg",
   },
   {
-    name: "David Adeyemi",
+    name: "David Kings",
     role: "Employer Success",
     image: "/images/portrait-4.jpg",
   },
