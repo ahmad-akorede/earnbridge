@@ -85,7 +85,6 @@ export type SuccessStory = {
   startingPoint: string;
   action: string;
   result: string;
-  date: string;
   audience: "candidate" | "employer";
   image: string;
 };
@@ -100,7 +99,6 @@ export const successStories: SuccessStory[] = [
       "Completed readiness guidance, profile improvement, and communication practice.",
     result:
       "Shortlisted for a remote support role after assessment and prepared interviews.",
-    date: "Sample story · 2026",
     audience: "candidate",
     image: "/images/portrait-1.jpg",
   },
@@ -113,7 +111,6 @@ export const successStories: SuccessStory[] = [
       "Role pathway coaching, digital skills practice, and application readiness support.",
     result:
       "Matched into a project-based operations support opportunity with clear expectations.",
-    date: "Sample story · 2026",
     audience: "candidate",
     image: "/images/portrait-2.jpg",
   },
@@ -126,7 +123,6 @@ export const successStories: SuccessStory[] = [
       "Shared a role brief; EarnBridge assessed and prepared candidates before introduction.",
     result:
       "Received a shortlist of readiness-checked candidates and began onboarding support.",
-    date: "Sample story · 2026",
     audience: "employer",
     image: "/images/employer.jpg",
   },
@@ -138,7 +134,6 @@ export const successStories: SuccessStory[] = [
     action: "LinkedIn and portfolio guidance plus assessment preparation.",
     result:
       "Improved profile clarity and progressed through a structured matching review.",
-    date: "Sample story · 2026",
     audience: "candidate",
     image: "/images/portrait-3.jpg",
   },

@@ -58,7 +58,6 @@ export default function SuccessStoriesPage() {
                   <p className="font-medium text-navy">Result</p>
                   <p className="text-muted">{story.result}</p>
                 </div>
-                <p className="pt-2 text-xs text-muted">{story.date}</p>
               </div>
             </article>
           ))}

@@ -313,7 +313,6 @@ export default function HomePage() {
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-muted">{story.result}</p>
-                <p className="mt-4 text-xs text-muted">{story.date}</p>
               </article>
             ))}
           </div>
